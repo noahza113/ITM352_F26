@@ -1,4 +1,4 @@
-# ITM352_F26_repo
+# ITM352_F26
 ITEM 352 Repo for class work
 
 This is a really awesome repo I just created. 
