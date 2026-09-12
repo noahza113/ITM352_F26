@@ -1,5 +1,4 @@
-import HandyMath
-from HandyMath import max, min
+import from HandyMath import max, min
 
 # Get 2 numbers from the user for the HandyMath calculations 
 number1 = float(input("Enter the first number: "))
