@@ -6,7 +6,7 @@
 #Name: Noah Zane
 #Date: Sept 25, 2026
 
-age = 22
+age = 82
 day = "Tuesday"
 matinee = True
 
@@ -14,14 +14,21 @@ price = 14
 
 if day == "Tuesday":
     price = 10
+
 if age >= 65:
     price = 8
+
 if matinee:
     if age >= 65:
         price = 5
     else:
         price = 8
 
+
 print(f"Day: {day}, Matinee: {matinee}")
+if (age >= 65):
+    print("Welcome, senior")
+else:
+    print("Welcome, non-senior")
 
 print(f"Ticket price is ${price:.2f}")
