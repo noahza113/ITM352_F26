@@ -1,0 +1,137 @@
+{
+  "Geography": {
+    "double_or_nothing": {
+      "question": "Which river flows through Cairo?",
+      "answers": ["The Nile", "The Amazon", "The Danube", "The Mississippi"],
+      "hint": "It is often called the longest river in the world."
+    },
+    "What is the capital of France?": {
+      "answers": ["Paris", "Toulouse", "Nice", "Avignon"],
+      "hint": "This city is also known as the City of Light."
+    },
+    "What is the capital of Germany?": {
+      "answers": ["Berlin", "Munich", "Hamburg", "Frankfurt"],
+      "hint": "The Berlin Wall once divided this city."
+    },
+    "What is the capital of Italy?": {
+      "answers": ["Rome", "Milan", "Naples", "Venice"],
+      "hint": "This city is home to the Colosseum."
+    },
+    "What is the capital of Spain?": {
+      "answers": ["Madrid", "Barcelona", "Seville", "Valencia"],
+      "hint": "This city is home to the Prado Museum."
+    },
+    "What is the capital of the United States?": {
+      "answers": ["Washington, D.C.", "New York City", "Los Angeles", "Chicago"],
+      "hint": "The White House and the U.S. Capitol are located here."
+    }
+  },
+  "General Knowledge": {
+    "double_or_nothing": {
+      "question": "What is the smallest prime number?",
+      "answers": ["2", "1", "0", "3"],
+      "hint": "It is the only even prime number."
+    },
+    "In Monty Python and the Holy Grail, which two types of swallows are compared?": {
+      "answers": ["African and European", "Barn and cliff", "Tree and bank", "Cave and sea"],
+      "hint": "One type comes from Africa; the other comes from Europe."
+    },
+    "What is the largest ocean on Earth?": {
+      "answers": ["Pacific Ocean", "Atlantic Ocean", "Indian Ocean", "Arctic Ocean"],
+      "hint": "It lies between Asia and the Americas."
+    },
+    "How many sides does a hexagon have?": {
+      "answers": ["Six", "Five", "Seven", "Eight"],
+      "hint": "The prefix 'hexa-' means this number."
+    },
+    "Which gas do plants absorb from the atmosphere?": {
+      "answers": ["Carbon dioxide", "Oxygen", "Nitrogen", "Hydrogen"],
+      "hint": "Plants use this gas during photosynthesis."
+    },
+    "What is the chemical symbol for gold?": {
+      "answers": ["Au", "Ag", "Gd", "Go"],
+      "hint": "Its symbol comes from the Latin word 'aurum'."
+    }
+  },
+  "History & Art": {
+    "double_or_nothing": {
+      "question": "Who was the first president of the United States?",
+      "answers": ["George Washington", "John Adams", "Thomas Jefferson", "James Madison"],
+      "hint": "His portrait appears on the one-dollar bill."
+    },
+    "The Last Supper was painted by which artist?": {
+      "answers": ["Leonardo da Vinci", "Michelangelo", "Raphael", "Caravaggio"],
+      "hint": "This Renaissance artist also painted the Mona Lisa."
+    },
+    "Who painted the Mona Lisa?": {
+      "answers": ["Leonardo da Vinci", "Vincent van Gogh", "Claude Monet", "Pablo Picasso"],
+      "hint": "This Renaissance artist also painted The Last Supper."
+    },
+    "In what year was the United States Declaration of Independence adopted?": {
+      "answers": ["1776", "1787", "1801", "1812"],
+      "hint": "It was adopted during the 18th century, in the year ending with 76."
+    },
+    "Which ancient civilization built the pyramids at Giza?": {
+      "answers": ["Ancient Egyptians", "Ancient Romans", "Ancient Greeks", "Ancient Persians"],
+      "hint": "The pyramids were built along the Nile River."
+    },
+    "Who was the first person to walk on the Moon?": {
+      "answers": ["Neil Armstrong", "Buzz Aldrin", "Yuri Gagarin", "Michael Collins"],
+      "hint": "His first name is Neil."
+    }
+  },
+  "Sports": {
+    "double_or_nothing": {
+      "question": "Which sport is played with a shuttlecock?",
+      "answers": ["Badminton", "Tennis", "Squash", "Table tennis"],
+      "hint": "Players hit it over a net using lightweight rackets."
+    },
+    "Which NHL player has the most career points?": {
+      "answers": ["Wayne Gretzky", "Mario Lemieux", "Jaromir Jagr", "Sidney Crosby"],
+      "hint": "His nickname is 'The Great One'."
+    },
+    "How many players from one basketball team are on the court at a time?": {
+      "answers": ["Five", "Four", "Six", "Seven"],
+      "hint": "A regulation team has one center and four other players on court."
+    },
+    "Which country won the first FIFA World Cup in 1930?": {
+      "answers": ["Uruguay", "Brazil", "Italy", "Argentina"],
+      "hint": "The tournament was hosted by this South American country."
+    },
+    "In tennis, what is the score called when a player has zero points?": {
+      "answers": ["Love", "Nil", "Blank", "Deuce"],
+      "hint": "The term is also used to mean affection."
+    },
+    "How many rings are on the Olympic flag?": {
+      "answers": ["Five", "Four", "Six", "Seven"],
+      "hint": "The rings represent five inhabited continents."
+    }
+  },
+  "Literature": {
+    "double_or_nothing": {
+      "question": "What is the name of Sherlock Holmes's close friend and companion?",
+      "answers": ["Dr. John Watson", "Inspector Lestrade", "Mycroft Holmes", "Irene Adler"],
+      "hint": "He is a doctor and often narrates the stories."
+    },
+    "Which classic novel opens with the line 'Call me Ishmael'?": {
+      "answers": ["Moby-Dick", "The Great Gatsby", "The Old Man and the Sea", "The Scarlet Letter"],
+      "hint": "The narrator is part of the crew aboard the Pequod."
+    },
+    "Who wrote the play Hamlet?": {
+      "answers": ["William Shakespeare", "Charles Dickens", "Jane Austen", "Oscar Wilde"],
+      "hint": "This English playwright also wrote Romeo and Juliet."
+    },
+    "Who wrote Pride and Prejudice?": {
+      "answers": ["Jane Austen", "Emily Bronte", "Mary Shelley", "Virginia Woolf"],
+      "hint": "Her other novels include Sense and Sensibility."
+    },
+    "Who wrote The Hobbit?": {
+      "answers": ["J. R. R. Tolkien", "C. S. Lewis", "George Orwell", "H. G. Wells"],
+      "hint": "This author also wrote The Lord of the Rings."
+    },
+    "Who wrote The Lion, the Witch and the Wardrobe?": {
+      "answers": ["C. S. Lewis", "J. R. R. Tolkien", "Roald Dahl", "Lewis Carroll"],
+      "hint": "This author created the world of Narnia."
+    }
+  }
+}
