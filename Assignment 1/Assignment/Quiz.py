@@ -1,3 +1,4 @@
+
 import json
 import random
 from pathlib import Path
@@ -12,6 +13,7 @@ NUM_QUESTIONS_PER_QUIZ = 5
 
 
 def play_double_or_nothing(current_score, bonus_question):
+
     if current_score <= 0:
         print("You need at least one point to play double or nothing.")
         return current_score
@@ -59,6 +61,8 @@ def play_double_or_nothing(current_score, bonus_question):
     return current_score
 
 
+# The player selects a category from the JSON data. The script displays
+# the available category names and validates that the user's input is in range.
 categories = list(questions)
 print("Choose a category:")
 for category_num, category in enumerate(categories, start=1):
@@ -71,6 +75,8 @@ while True:
         break
     print(f"Please enter a number from 1 to {len(categories)}.")
 
+# Build the set of questions for the chosen category, excluding the hidden
+# bonus question so it is not included in the main quiz round.
 category_data = questions[selected_category]
 category_questions = {
     question: question_data
@@ -82,6 +88,8 @@ selected_questions = random.sample(list(category_questions.items()), k=num_quest
 
 num_correct = 0
 
+# Each question is displayed with shuffled answer labels so the player must
+# choose from the multiple-choice set instead of relying on a fixed order.
 for num, (question, question_data) in enumerate(selected_questions, start=1):
     answers = question_data["answers"]
     hint = question_data["hint"]
@@ -113,5 +121,7 @@ for num, (question, question_data) in enumerate(selected_questions, start=1):
 
 print(f"\nYou got {num_correct} out of {len(selected_questions)} correct.")
 
+# The final score is passed to the bonus round, which may double the score or
+# wipe it out depending on whether the player answers correctly.
 final_score = play_double_or_nothing(num_correct, category_data["double_or_nothing"])
 print(f"Final score: {final_score} point(s).")
