@@ -2,20 +2,6 @@
 
 This report records automated test runs for the quiz. Each run simulates a player choosing a category, answering questions, and handling invalid input or hints. The goal is to confirm that the game responds in a predictable way and that human errors are handled cleanly.
 
-## What each section means
-
-- Category: which question set the player selected.
-- Question: the specific question being tested.
-- Mode: the behavior being tested, such as a correct answer, wrong answer, invalid input, or hint request.
-- Final Score: the score left at the end of the run.
-- Output Snippet: a short example of the program's terminal output for that scenario.
-
-## Why these tests matter
-
-- Valid label tests confirm the answer checker accepts the expected multiple-choice option.
-- Invalid input tests confirm the program rejects bad selections and prompts again.
-- Hint tests confirm the quiz reveals a hint without crashing the flow.
-- Bonus-round tests confirm the double-or-nothing feature behaves correctly for both winning and losing outcomes.
 
 This report tests every category and question with valid label selections, invalid selections, and hint-based recovery. Results are captured for each scenario in a separate run.
 

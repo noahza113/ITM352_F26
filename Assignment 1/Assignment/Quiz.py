@@ -4,21 +4,21 @@ import random
 from pathlib import Path
 from string import ascii_lowercase
 
-questions_path = Path(__file__).resolve().with_name("questions.json")
+questions_path = Path(__file__).resolve().with_name("questions.json") 
 
 with questions_path.open("r", encoding="utf-8") as file:
     questions = json.load(file)
 
-NUM_QUESTIONS_PER_QUIZ = 5
+NUM_QUESTIONS_PER_QUIZ = 5 
 
 
 def play_double_or_nothing(current_score, bonus_question):
 
-    if current_score <= 0:
-        print("You need at least one point to play double or nothing.")
+    if current_score <= 0: #this checks if the current score is less than or equal to 0, if it is less than or equal to 0 then the player cannot play double or nothing
+        print("You need at least one point to play double or nothing.") 
         return current_score
 
-    while True:
+    while True: #this loop will keep asking the player if they want to play double or nothing until they give a valid answer
         gamble_choice = input(
             f"You have {current_score} point(s). Double or nothing? (yes/no) "
         ).strip().lower()
@@ -26,27 +26,26 @@ def play_double_or_nothing(current_score, bonus_question):
             break
         print("Please enter yes or no.")
 
-    if gamble_choice in ("yes", "y"):
-        question = bonus_question["question"]
+    if gamble_choice in ("yes", "y"): #if the player chooses to play double or nothing loads the bonus question and answers
         answers = bonus_question["answers"]
         correct_answer = answers[0]
-        print(f"\nDouble-or-nothing question: {question}")
+        print(f"\nDouble-or-nothing question: {question}") #prints the bonus question to the player
 
-        labeled_answers = dict(zip(
+        labeled_answers = dict(zip( #shuffles the answers and labels them with letters a, b, c, etc. so the player can choose an answer by letter
             ascii_lowercase,
             random.sample(answers, k=len(answers)),
         ))
-        for label, answer in labeled_answers.items():
+        for label, answer in labeled_answers.items(): #prints the labeled answers to the player
             print(f"{label}. {answer}")
 
         while True:
-            answer_label = input("Choice (or ? for a hint)? ").strip().lower()
-            if answer_label == "?":
+            answer_label = input("Choice (or ? for a hint)? ").strip().lower() #asks the player to choose an answer or ask for a hint
+            if answer_label == "?": #if the player asks for a hint, prints the hint and continues the loop to ask for an answer again
                 print(f"Hint: {bonus_question['hint']}")
                 continue
-            if answer_label in labeled_answers:
+            if answer_label in labeled_answers: #if the player chooses a valid answer, breaks the loop
                 break
-            print(
+            print( #prints an error message if the player chooses an invalid answer
                 f"Invalid choice. Please select one of "
                 f"{', '.join(labeled_answers.keys())}, or ? for a hint."
             )
