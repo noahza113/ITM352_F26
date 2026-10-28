@@ -1,7 +1,8 @@
+# Analyze an array of tuples using numpy
 import numpy as np
 
-# Create a list of (percentile, household income) tuples.
-percentile_incomes = [
+# Create an array of tuples of household income and percentiles.
+hh_income = [
     (10, 14629),
     (20, 25600),
     (30, 37002),
@@ -15,12 +16,15 @@ percentile_incomes = [
 
 hh_income_array = np.array(hh_income)
 
-#report the dimentions of the array and number of elements in the array
+# report the dimensions of the array and the number of elements in the array
+print(f"Dimensions of the array: {hh_income_array.ndim}")
+print(f"Number of elements in the array: {hh_income_array.size}")
 
-print(f"Dimentions of the array:"(hh_income_array.ndia)"
-print()
+for i in range(hh_income_array.shape[0]):
+    percentile, income = hh_income_array[i]
+    print(f"Percentile: {percentile}, Income: {income}")
 
-
-for i in range (hh_income_array.shape[0]):
-    print((hh_income_array[1,0]),hh_income_array{1,2}))
-
+for i in range(hh_income_array.shape[0]):
+    print(hh_income_array[i, 0], hh_income_array[i, 1])
+    
+        
