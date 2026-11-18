@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Club</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="{{ url_for('index') }}">
+            <span class="brand-mark">Q</span>
+            <span>quiz club</span>
+        </a>
+        {% if username %}
+            <div class="account-bar">
+                <span>Playing as <strong>{{ username }}</strong></span>
+                <a class="button button-quiet" href="{{ url_for('logout') }}">Log out</a>
+            </div>
+        {% else %}
+            <span class="header-note">A little knowledge goes a long way.</span>
+        {% endif %}
+    </header>
+
+    <main class="page-shell">
+        <section class="hero">
+            <p class="eyebrow">YOUR NEXT GOOD ANSWER</p>
+            <h1>Curiosity looks<br><span>good on you.</span></h1>
+            <p class="hero-copy">Take a quick quiz, learn from every answer, and see how far your knowledge takes you.</p>
+            <div class="hero-stats">
+                <span><strong>{{ question_count }}</strong> questions</span>
+                <span><strong>{{ categories|length }}</strong> topics</span>
+                <span><strong>5</strong> questions per round</span>
+            </div>
+        </section>
+
+        {% if error %}
+            <p class="notice notice-error" role="alert">{{ error }}</p>
+        {% endif %}
+
+        {% if username %}
+            <section class="card start-card">
+                <p class="eyebrow">READY WHEN YOU ARE</p>
+                <h2>Pick your quiz</h2>
+                <form action="{{ url_for('start_quiz') }}" method="post">
+                    <label for="category">Choose a topic</label>
+                    <select id="category" name="category" required>
+                        <option value="all">All topics</option>
+                        {% for category in categories %}
+                            <option value="{{ category }}">{{ category }}</option>
+                        {% endfor %}
+                    </select>
+                    <p class="field-help">Questions and answers are shuffled each time.</p>
+                    <button class="button button-primary button-wide" type="submit">Start a quiz →</button>
+                </form>
+
+                <div class="history-section">
+                    <h3>Your recent scores</h3>
+                    <ul class="score-list">
+                        {% for score in scores %}
+                            <li><strong>{{ score.score }} / {{ score.total }}</strong></li>
+                        {% else %}
+                            <li class="muted">Your first score is waiting for you.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </section>
+        {% else %}
+            <section class="auth-grid">
+                <article class="card auth-card">
+                    <p class="eyebrow">NEW AROUND HERE?</p>
+                    <h2>Create your account</h2>
+                    <p class="muted">Choose a username and password to save your scores.</p>
+                    <form class="auth-form" action="{{ url_for('register') }}" method="post">
+                        <label for="register-username">Username</label>
+                        <input id="register-username" name="username" type="text" minlength="3" maxlength="20" required>
+                        <p class="field-help">Use 3–20 letters or numbers.</p>
+                        <label for="register-password">Password</label>
+                        <input id="register-password" name="password" type="password" minlength="8" maxlength="50" required>
+                        <p class="field-help">Use at least 8 characters.</p>
+                        <button class="button button-primary button-wide" type="submit">Sign up</button>
+                    </form>
+                </article>
+
+                <article class="card auth-card">
+                    <p class="eyebrow">GOOD TO SEE YOU</p>
+                    <h2>Welcome back</h2>
+                    <p class="muted">Log in to continue building your quiz streak.</p>
+                    <form class="auth-form" action="{{ url_for('login') }}" method="post">
+                        <label for="login-username">Username</label>
+                        <input id="login-username" name="username" type="text" minlength="3" maxlength="20" required>
+                        <label for="login-password">Password</label>
+                        <input id="login-password" name="password" type="password" required>
+                        <button class="button button-secondary button-wide" type="submit">Log in</button>
+                    </form>
+                </article>
+            </section>
+        {% endif %}
+        <p class="page-footnote">Made for curious people. Take your time, trust your instincts, and have fun.</p>
+    </main>
+</body>
+</html>

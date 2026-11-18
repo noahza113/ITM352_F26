@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your results | Quiz Club</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="{{ url_for('index') }}">
+            <span class="brand-mark">Q</span>
+            <span>quiz club</span>
+        </a>
+        <span class="account-note">Nice work, <strong>{{ session["username"] }}</strong></span>
+    </header>
+
+    <main class="results-shell">
+        <section class="results-hero">
+            <p class="eyebrow">QUIZ COMPLETE</p>
+            <h1>Look at you,<br><span>getting smarter.</span></h1>
+            <p class="results-subtitle">You showed up, thought it through, and learned along the way.</p>
+        </section>
+
+        <section class="score-card">
+            <div>
+                <p class="eyebrow">YOUR FINAL SCORE</p>
+                <p class="score-value">{{ score }}<span> / {{ total_questions }}</span></p>
+            </div>
+            <div class="score-summary">
+                <p><strong>{{ correct_count }}</strong> correct</p>
+                <p><strong>{{ incorrect_count }}</strong> to revisit</p>
+                <p><strong>{{ time_taken // 60 }}:{{ "%02d"|format(time_taken % 60) }}</strong> time taken</p>
+            </div>
+        </section>
+
+        <div class="results-grid">
+            <section class="card results-card">
+                <p class="eyebrow">HOW YOU DID</p>
+                <h2>By topic</h2>
+                <ul class="topic-list">
+                    {% for category in category_scores %}
+                        <li>
+                            <span>{{ category }}</span>
+                            <strong>{{ category_scores[category].correct }} / {{ category_scores[category].total }}</strong>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </section>
+
+            <section class="card results-card">
+                <p class="eyebrow">A LITTLE MORE PRACTICE</p>
+                <h2>Areas to improve</h2>
+                {% if incorrect_answers %}
+                    <ul class="improvement-list">
+                        {% for category in improvement_areas %}
+                            <li><span>{{ category }}</span><strong>{{ improvement_areas[category] }} missed</strong></li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="success-note">A perfect round! Keep that momentum going.</p>
+                {% endif %}
+            </section>
+        </div>
+
+        {% if incorrect_answers %}
+            <section class="card review-card">
+                <p class="eyebrow">LEARN FROM THE ROUND</p>
+                <h2>Questions to revisit</h2>
+                <ol class="review-list">
+                    {% for answer in incorrect_answers %}
+                        <li>
+                            <span class="topic-tag">{{ answer.category }}</span>
+                            <h3>{{ answer.question }}</h3>
+                            <p class="answer-comparison">Your answer: <strong>{{ answer.your_answer }}</strong></p>
+                            <p class="answer-comparison">Correct answer: <strong>{{ answer.correct_answer }}</strong></p>
+                        </li>
+                    {% endfor %}
+                </ol>
+            </section>
+        {% endif %}
+
+        <a class="button button-primary results-home" href="{{ url_for('index') }}">Play another round →</a>
+    </main>
+</body>
+</html>
