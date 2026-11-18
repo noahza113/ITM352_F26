@@ -1,15 +1,20 @@
 """Flask version of the Assignment 1 quiz."""
 
+# Python tools for reading JSON files, shuffling questions, measuring time,
+# and building file paths.
 import json
 import os
 import random
 import time
 from pathlib import Path
 
+# Flask connects the web pages to the Python functions below.
 from flask import Flask, redirect, render_template, request, session, url_for
+# These helpers save password hashes instead of plain-text passwords.
 from werkzeug.security import check_password_hash, generate_password_hash
 
 
+# Tell Flask where the HTML pages and CSS file are stored.
 app = Flask(
     __name__,
     template_folder=str(Path(__file__).parent),
@@ -17,6 +22,7 @@ app = Flask(
 )
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", os.urandom(32))
 
+# Keep all quiz data in the Assignment 3 data folder.
 DATA_FOLDER = Path(__file__).parent / "data"
 QUESTIONS_FILE = DATA_FOLDER / "questions.json"
 USERS_FILE = DATA_FOLDER / "users.json"
@@ -25,15 +31,18 @@ QUESTIONS_PER_QUIZ = 5
 
 
 def load_questions():
-    """Read questions from the JSON file and put them in a simple list."""
+    """Read the JSON question bank and make a list the quiz can use."""
     with open(QUESTIONS_FILE, "r", encoding="utf-8") as file:
         question_data = json.load(file)
 
     questions = []
+    # The JSON file groups questions by category. Convert each entry into a
+    # question record so the quiz can choose from all categories the same way.
     for category in question_data:
         for question_name in question_data[category]:
             details = question_data[category][question_name]
 
+            # Bonus questions store their question text inside the details.
             if question_name == "double_or_nothing":
                 question_text = details["question"]
             else:
@@ -52,7 +61,7 @@ def load_questions():
 
 
 def read_json_file(file_path, empty_value):
-    """Read a JSON file, or return an empty value if it does not exist yet."""
+    """Read saved data; use an empty dictionary/list before the first save."""
     if not file_path.exists():
         return empty_value
 
@@ -61,13 +70,13 @@ def read_json_file(file_path, empty_value):
 
 
 def save_json_file(file_path, data):
-    """Save data in a JSON file."""
+    """Write updated account or score data back to its JSON file."""
     with open(file_path, "w", encoding="utf-8") as file:
         json.dump(data, file, indent=2)
 
 
 def show_home(error=None):
-    """Show the home page and the current user's recent scores."""
+    """Prepare the home page with topics, question count, and score history."""
     questions = load_questions()
     scores = read_json_file(SCORES_FILE, [])
     user_scores = [
@@ -85,7 +94,7 @@ def show_home(error=None):
 
 
 def save_quiz_score(quiz):
-    """Add the finished quiz to the JSON score file."""
+    """Add one completed quiz to the JSON score history."""
     scores = read_json_file(SCORES_FILE, [])
     scores.append(
         {
@@ -101,6 +110,7 @@ def save_quiz_score(quiz):
 
 @app.route("/")
 def index():
+    # The home page is also where question-data loading errors are explained.
     try:
         return show_home()
     except (OSError, json.JSONDecodeError, KeyError) as error:
@@ -117,6 +127,7 @@ def index():
 
 @app.route("/register", methods=["POST"])
 def register():
+    # Read and validate the registration form before saving a new account.
     username = request.form.get("username", "").strip().lower()
     password = request.form.get("password", "")
 
@@ -144,6 +155,7 @@ def register():
 
 @app.route("/login", methods=["POST"])
 def login():
+    # Check the submitted login against the saved password hash.
     username = request.form.get("username", "").strip().lower()
     password = request.form.get("password", "")
 
@@ -166,12 +178,14 @@ def login():
 
 @app.route("/logout")
 def logout():
+    # Clearing the session signs the current browser out.
     session.clear()
     return redirect(url_for("index"))
 
 
 @app.route("/start", methods=["POST"])
 def start_quiz():
+    # Select five questions and remember the round in the Flask session.
     if "username" not in session:
         return redirect(url_for("index"))
 
@@ -217,6 +231,8 @@ def start_quiz():
 
 @app.route("/quiz", methods=["GET", "POST"])
 def quiz():
+    # This route displays one question and processes its form buttons:
+    # "hint", "answer", and "next".
     if "username" not in session or "quiz" not in session:
         return redirect(url_for("index"))
 
@@ -230,6 +246,8 @@ def quiz():
     question = questions[question_number]
 
     if "options" not in quiz_data:
+        # Keep the shuffled choices in the session so a page refresh does not
+        # change which answer belongs to each displayed choice.
         options = question["answers"].copy()
         random.shuffle(options)
         quiz_data["options"] = options
@@ -264,6 +282,7 @@ def quiz():
             correct_answer = question["answers"][0]
             is_correct = selected_answer == correct_answer
 
+            # Save the response for the score and the end-of-quiz review.
             if is_correct:
                 quiz_data["score"] += 1
                 feedback = "Correct!"
@@ -285,6 +304,7 @@ def quiz():
             session["quiz"] = quiz_data
 
         elif action == "next" and quiz_data.get("answered"):
+            # Move forward only after an answer has been checked.
             quiz_data["question_number"] += 1
             quiz_data.pop("options", None)
             quiz_data.pop("answered", None)
@@ -292,6 +312,7 @@ def quiz():
             quiz_data.pop("feedback_correct", None)
 
             if quiz_data["question_number"] == len(questions):
+                # Count correct answers by category for the result page.
                 quiz_data["time_taken"] = int(time.time() - quiz_data["start_time"])
                 quiz_data["category_scores"] = {}
                 for answer in quiz_data["answers"]:
@@ -346,6 +367,7 @@ def quiz():
 
 @app.route("/result")
 def result():
+    # Build the final score summary and list the questions answered incorrectly.
     if "username" not in session or "result" not in session:
         return redirect(url_for("index"))
 

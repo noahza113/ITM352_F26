@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+    <!-- The player's name is available from the Flask session. -->
     <header class="site-header">
         <a class="brand" href="{{ url_for('index') }}">
             <span class="brand-mark">Q</span>
@@ -22,6 +23,7 @@
             <p class="results-subtitle">You showed up, thought it through, and learned along the way.</p>
         </section>
 
+        <!-- Overall score, correct/incorrect totals, and elapsed time. -->
         <section class="score-card">
             <div>
                 <p class="eyebrow">YOUR FINAL SCORE</p>
@@ -34,6 +36,7 @@
             </div>
         </section>
 
+        <!-- These lists summarize performance and show topics to practice. -->
         <div class="results-grid">
             <section class="card results-card">
                 <p class="eyebrow">HOW YOU DID</p>
@@ -64,6 +67,7 @@
         </div>
 
         {% if incorrect_answers %}
+            <!-- Show each missed question with the player's and correct answers. -->
             <section class="card review-card">
                 <p class="eyebrow">LEARN FROM THE ROUND</p>
                 <h2>Questions to revisit</h2>

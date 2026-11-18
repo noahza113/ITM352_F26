@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+    <!-- The player's name comes from the Flask session. -->
     <header class="site-header">
         <a class="brand" href="{{ url_for('index') }}">
             <span class="brand-mark">Q</span>
@@ -18,6 +19,7 @@
     <main class="quiz-shell">
         <a class="back-link" href="{{ url_for('index') }}">← Exit quiz</a>
         <section class="card quiz-card">
+            <!-- Flask supplies the category, question number, and progress. -->
             <div class="quiz-topline">
                 <span class="eyebrow">{{ question.category }}</span>
                 <span class="timer">Question {{ question_number }} of {{ total_questions }}</span>
@@ -40,6 +42,7 @@
                 <p class="form-message message-error" role="alert">{{ error }}</p>
             {% endif %}
 
+            <!-- The answer form posts back to Flask to check the selected choice. -->
             <form method="post">
                 <fieldset class="answer-options" {% if answered %}disabled{% endif %}>
                     <legend class="visually-hidden">Choose one answer</legend>
@@ -53,6 +56,7 @@
                 </fieldset>
 
                 {% if hint_shown %}
+                    <!-- Hints are displayed after the player selects the hint button. -->
                     <p class="notice">Hint: {{ hint }}</p>
                 {% endif %}
 

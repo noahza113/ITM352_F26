@@ -5,6 +5,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
+/* Header and two-column home page. */
 a {
     color: #1d6757;
 }
@@ -97,6 +98,7 @@ a {
     font-size: 12px;
 }
 
+/* Shared card, form, and button styling. */
 .card,
 .score-card {
     padding: 28px;
@@ -191,6 +193,7 @@ select:focus {
     background: #eaf5ed;
 }
 
+/* Lists for saved scores and quiz results. */
 .history-section,
 .review-card {
     margin-top: 24px;
@@ -215,6 +218,7 @@ select:focus {
     border-bottom: 1px solid #eef1ed;
 }
 
+/* Question page: progress, choices, and answer feedback. */
 .quiz-shell,
 .results-shell {
     max-width: 700px;
@@ -294,6 +298,7 @@ select:focus {
     gap: 10px;
 }
 
+/* Final score and missed-question review. */
 .score-card {
     display: flex;
     align-items: center;
@@ -336,6 +341,7 @@ select:focus {
     font-size: 12px;
 }
 
+/* Stack columns on narrow screens so the pages fit a phone. */
 @media (max-width: 700px) {
     .page-shell,
     .auth-grid,

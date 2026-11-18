@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+    <!-- The header shows whether the visitor is logged in. -->
     <header class="site-header">
         <a class="brand" href="{{ url_for('index') }}">
             <span class="brand-mark">Q</span>
@@ -23,6 +24,7 @@
     </header>
 
     <main class="page-shell">
+        <!-- Introductory text and counts are filled in by the Flask route. -->
         <section class="hero">
             <p class="eyebrow">YOUR NEXT GOOD ANSWER</p>
             <h1>Curiosity looks<br><span>good on you.</span></h1>
@@ -38,6 +40,7 @@
             <p class="notice notice-error" role="alert">{{ error }}</p>
         {% endif %}
 
+        <!-- Logged-in users start quizzes; other visitors can register or log in. -->
         {% if username %}
             <section class="card start-card">
                 <p class="eyebrow">READY WHEN YOU ARE</p>
