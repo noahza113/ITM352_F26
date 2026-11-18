@@ -225,6 +225,7 @@ def start_quiz():
         "answers": [],
         "start_time": time.time(),
         "feedback": None,
+        "hint_used": False,
     }
     return redirect(url_for("quiz"))
 
@@ -253,6 +254,7 @@ def quiz():
         quiz_data["options"] = options
         session["quiz"] = quiz_data
 
+    error = None
     if request.method == "POST":
         action = request.form.get("action")
 
@@ -275,7 +277,8 @@ def quiz():
                     error="Please choose one of the answers.",
                     answered=False,
                     hint=question["hint"],
-                    hint_shown=False,
+                    hint_shown=quiz_data.get("hint_shown", False),
+                    hint_used=quiz_data.get("hint_used", False),
                 )
 
             selected_answer = options[int(answer)]
@@ -308,6 +311,7 @@ def quiz():
             quiz_data["question_number"] += 1
             quiz_data.pop("options", None)
             quiz_data.pop("answered", None)
+            quiz_data.pop("hint_shown", None)
             quiz_data["feedback"] = None
             quiz_data.pop("feedback_correct", None)
 
@@ -341,7 +345,8 @@ def quiz():
                         error="Your score could not be saved. Please try again.",
                         answered=True,
                         hint=question["hint"],
-                        hint_shown=False,
+                        hint_shown=quiz_data.get("hint_shown", False),
+                        hint_used=quiz_data.get("hint_used", False),
                     )
                 session.pop("quiz")
                 session["result"] = quiz_data
@@ -349,6 +354,15 @@ def quiz():
 
             session["quiz"] = quiz_data
             return redirect(url_for("quiz"))
+
+        elif action == "hint":
+            if quiz_data.get("hint_used"):
+                error = "You can only use one hint per quiz."
+            else:
+                # This flag applies to the whole quiz, not just this question.
+                quiz_data["hint_used"] = True
+                quiz_data["hint_shown"] = True
+                session["quiz"] = quiz_data
 
     return render_template(
         "quiz.html",
@@ -358,10 +372,11 @@ def quiz():
         options=quiz_data["options"],
         feedback=quiz_data.get("feedback"),
         feedback_correct=quiz_data.get("feedback_correct"),
-        error=None,
+        error=error,
         hint=question["hint"],
         answered=quiz_data.get("answered", False),
-        hint_shown=request.form.get("action") == "hint",
+        hint_shown=quiz_data.get("hint_shown", False),
+        hint_used=quiz_data.get("hint_used", False),
     )
 
 

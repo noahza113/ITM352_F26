@@ -157,6 +157,11 @@ select:focus {
     background: white;
 }
 
+.button:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
 .button-wide {
     width: 100%;
     margin-top: 14px;

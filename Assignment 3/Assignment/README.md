@@ -1,49 +1,75 @@
 # How to Open Quiz Club
 
-## 1. Open the Assignment folder
+These instructions work on Windows, macOS, and Linux. You need Python 3.9 or newer and an internet connection the first time you install Flask.
 
-In VS Code, open this folder:
+## 1. Open the program folder
 
-```text
-C:\Users\zneno\OneDrive\Documents\GitHub\ITM352_F26\Assignment 3\Assignment
-```
+In VS Code, choose **File → Open Folder** and open the Assignment folder that contains `webapp_quiz.py`.
 
-Open **Terminal → New Terminal**. Make sure the terminal is in the folder containing `webapp_quiz.py`. In PowerShell, you can get there with:
+Open **Terminal → New Terminal**. The terminal should start in that same folder. If it does not, use `cd` to move into the folder; the folder's location can be different on each computer.
 
-```powershell
-cd "C:\Users\zneno\OneDrive\Documents\GitHub\ITM352_F26\Assignment 3\Assignment"
-```
+## 2. Create a Python environment
 
-Do not add another `Assignment 3\Assignment` to the end of the path.
+Run the command for your computer:
 
-## 2. Install what the program needs
-
-Run these commands the first time:
+**Windows PowerShell**
 
 ```powershell
 py -m venv .venv
+```
+
+If `py` is not recognized, try `python -m venv .venv`.
+
+**macOS or Linux**
+
+```sh
+python3 -m venv .venv
+```
+
+## 3. Activate the environment and install Flask
+
+Run the activation command for your terminal:
+
+**Windows PowerShell**
+
+```powershell
 .\.venv\Scripts\Activate.ps1
+```
+
+**Windows Command Prompt**
+
+```bat
+.venv\Scripts\activate.bat
+```
+
+**macOS or Linux**
+
+```sh
+source .venv/bin/activate
+```
+
+Then, on all systems, install the required package:
+
+```sh
 python -m pip install -r requirements.txt
 ```
 
-This makes a local Python environment and installs Flask.
+If your computer uses `python3` instead of `python`, use `python3 -m pip install -r requirements.txt`.
 
-## 3. Start the website
+You only need to create the environment and install Flask the first time. Later, open a terminal in the Assignment folder and activate the environment again.
 
-In the same terminal, run:
+## 4. Start and open the website
 
-```powershell
+In the terminal, run:
+
+```sh
 python webapp_quiz.py
 ```
 
-Leave the terminal open while you use the program.
+If needed, use `python3 webapp_quiz.py`. Keep the terminal open while playing, then open <http://127.0.0.1:5000> in your browser. Register or log in, choose a topic, and start the quiz. You can request one hint during each quiz; after it is used, the hint button is disabled for the rest of that round.
 
-## 4. Open it in your browser
-
-Go to <http://127.0.0.1:5000>. Create an account or log in, select a quiz topic, and start playing.
-
-To close the program, return to the terminal and press **Ctrl+C**.
+To stop the app, return to the terminal and press **Ctrl+C**.
 
 ## Where your data is saved
 
-The questions are in `data\questions.json`. Accounts are saved in `data\users.json` after someone registers, and quiz scores are saved in `data\scores.json` after completing a quiz. Those two files are created in this Assignment folder when needed.
+The quiz questions are in `data/questions.json`. The app creates `data/users.json` when someone registers and `data/scores.json` when someone completes a quiz. These files are stored in the Assignment folder on the computer running the app.

@@ -13,6 +13,16 @@
 | `test_hint_and_invalid_answer` | PASS | Displayed a hint and rejected an invalid answer without recording a response. |
 | `test_full_quiz_feedback_score_and_saved_history` | PASS | Completed five questions with four correct and one incorrect, checked both feedback messages, verified a duplicate answer was not counted, displayed the 4/5 result and missed-question review, and confirmed the score appeared in saved score history. |
 
+## Hint limit follow-up
+
+After adding the one-hint-per-quiz limit, an additional focused check passed:
+
+| Test | Result | What was checked |
+|---|---|---|
+| `test_one_hint_per_quiz` | PASS | Showed the hint once, rejected a second request, and confirmed the limit remained in effect on the next question. |
+
+This follow-up also used temporary account and score files.
+
 ## Summary
 
-All four checks passed. The quiz score was saved in the temporary `scores.json` file used by the test and appeared in the home-page score history. No test accounts or scores were added to the app's local data files.
+The original four integration checks and the hint-limit follow-up passed. The quiz score was saved in a temporary `scores.json` file during the full-quiz check and appeared in the home-page score history. No test accounts or scores were added to the app's local data files.

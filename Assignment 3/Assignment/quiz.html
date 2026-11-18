@@ -67,8 +67,11 @@
                 {% else %}
                     <div class="quiz-actions">
                         <button class="button button-primary" type="submit" name="action" value="answer">Submit answer</button>
-                        <button class="button button-secondary" type="submit" name="action" value="hint">Show hint</button>
+                        <button class="button button-secondary" type="submit" name="action" value="hint" {% if hint_used %}disabled{% endif %}>Show hint</button>
                     </div>
+                    <p class="field-help">
+                        {% if hint_used %}Your one hint for this quiz has been used.{% else %}You can use one hint during this quiz.{% endif %}
+                    </p>
                 {% endif %}
             </form>
         </section>
